@@ -15,7 +15,20 @@ h1{
   text-align: center;
 }
 .form-container{
-  text-align: center;
+  	text-align: center;
+	  position: fixed;
+	  background-color: rgb(6, 11, 40);
+	  width: 100%;
+	  text-align: center;
+	  color: white;
+	  height: 30px;
+		top: 0;
+	  /*padding-top: 1vh;*/
+	}
+.searcher{
+	position: relative;
+	padding-top: 0.5%;
+
 }
 .container{
   padding-top: 3vh;
@@ -24,6 +37,7 @@ h1{
   flex-direction: column;
   justify-content: center;
   flex-wrap: wrap;
+
 
 
 }
@@ -89,12 +103,42 @@ h3{
   	width: 100%;
   	height: 100%;
 }
-.form-container{
-  position: fixed;
-  background-color: rgb(6, 11, 40);
-  width: 100%;
-  text-align: center;
-  color: white;
-  height: 5vh;
-  padding-top: 1vh;
+
+.fail{
+	height: 100vh;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-flow: column;
+	text-align: center;
+
+}
+#nw{
+	background-color: rgba(255,255,255,.9);
+}
+#f1{
+	background-color: rgba(255,255,255,.9);
+}
+#f2{
+	background-color: rgba(255,255,255,.9);
+}
+#f3{
+	background-color: rgba(255,255,255,.9);
+}
+@media only screen and (max-width:1280px) {
+	.now{
+		width: 70%;
+	}
+
+	.forca{
+		flex-direction: column;
+		justify-content: center;
+		align-content: center;
+	}
+	.forecast{
+		width: 50%;
+		margin-left: 25%;
+
+	}
+
 }

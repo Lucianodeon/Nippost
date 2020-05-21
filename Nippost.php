@@ -32,15 +32,15 @@ $postcod="";
     <header class="form-container">
 
 
-        <form class="" action="" method="get"enctype="multipart/form-data">
+        <form class="searcher" action="" method="get"enctype="multipart/form-data">
           <label for="">Enter your Post Code</label>
           <input id="psearch" type="text" placeholder="Ex:XXX-XXXX" name="postcode" value="<?=$postcod?>">
-          <button type="submit"><strong>Search</strong></button>
+          <button type="submit"id="buttonId"><strong>Search</strong></button>
         </form>
       </header>
-    <?php
 
-    if(isset($_GET["postcode"]))
+
+  <?php  if(isset($_GET["postcode"]))
     {
       //Here i use get to take the value of submit and only take the numbers of the postal code, so if you write letters, the program ignore it
       $postcod=$_GET["postcode"];
@@ -74,10 +74,24 @@ $postcod="";
       if ($err) {
         echo "cURL Error #:" . $err;
       }
+      //catch errors
       if(!array_key_exists("data", $dat))
       {
 
-        echo "Please Enter a Valid Postcode";
+        $vamo= "Please Enter a Valid Postcode";
+        ?>
+
+
+
+        <div class="fail">
+
+
+        <h1>The postal code is invalid</h1>
+
+        <h2>Please try another one</h2>
+        </div>
+
+        <?php
       }
 
        else
@@ -85,8 +99,16 @@ $postcod="";
         // Here I catch if the combinations of numbers is correct but there is not a city for that postal code
         if(!array_key_exists(0, $dat["data"]))
         {
+          ?>
+          <div class="fail">
 
-          echo "Please Enter a Valid Postcode";
+
+          <h1>The postal code is invalid</h1>
+
+          <h2>Please try another one</h2>
+
+          </div>
+          <?php
 
         }
         else {
@@ -101,7 +123,7 @@ $postcod="";
           //There are cases in small japanese islands where openweathermap might not have data of that particular islands
           //so i catch the null in the json or 404 and change the city to the prefecture.
           if ($fwdata==NULL) {
-            echo "My api does not have that city ($city) in the database, but i will give you the prefecture capital data ($prefcap) data";
+            $upsy = "My api does not have that city ($city) in the database, but i will give you the prefecture capital data ($prefcap) data";
             $dat["data"][0]["town"]=$dat["data"][0]["state"];
             $city = $dat["data"][0]["town"];
             $fwurl="http://api.openweathermap.org/data/2.5/forecast?q=$city&units=metric&cnt=1&appid=f3f7220c8457e9013bf4182b6cd5f5e4";
@@ -146,7 +168,7 @@ $postcod="";
           <section class="ahora">
 
 
-          <div class="now">
+          <div class="now" id="nw">
             <h2><?=$today?></h3>
             <h2>Now in : <?=$cityname?> The temperature is:<?=$tempnow?>°C</h2>
             <img src=" http://openweathermap.org/img/wn/<?=$iconnow?>@2x.png" alt="">
@@ -158,7 +180,7 @@ $postcod="";
         <div class="forca">
 
 
-          <div class="forecast">
+          <div class="forecast" id="f1">
             <h2>Today in: <?=$cityname?></h2>
             <h2>(<?=$today?>)</h2>
 
@@ -168,7 +190,7 @@ $postcod="";
             <h3><?=$todayweather?>: <?=$todaydesc?> </h3>
 
           </div>
-          <div class="forecast">
+          <div class="forecast" id="f2">
             <h2>Tomorrow in: <?=$cityname?> </h2>
             <h2>(<?=$tomorrow?>)</h2>
             <h3>The maximun temperature will be:<?=$tomorrowmax?>°C </h3>
@@ -178,7 +200,7 @@ $postcod="";
             <h3><?=$tomweather?>, <?=$tomdesc?></h3>
 
           </div>
-          <div class="forecast">
+          <div class="forecast" id="f3">
             <h2>The day after tomorrow in: <?=$cityname?> </h2>
             <h2>(<?=$dayafter?>)</h2>
             <h3>The maximun temperature will be:<?=$dayaftermax?>°C </h3>
@@ -204,10 +226,22 @@ $postcod="";
 
       }
       }
+    else {;
+        ?>
+          <div class="fail">
 
 
 
-    ?>
+        <h1>Welcome to Nippost</h1>
+        <h2>Enter a 7 digit postal code in the search bar above to get data of the weather there</h2>
+      
+
+      </div>
+
+      <?php
+    };
+
+        ?>
 
 
 
